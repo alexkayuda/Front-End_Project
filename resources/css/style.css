@@ -1,0 +1,729 @@
+/*--------------------------------------------------------------------------------------------------------------------
+                        A good thing to do first
+ext: autoprefix. -> adds prefixes to code that is not supported by certain browser (select code -> press f1 -> autoprefix -> enter). Done
+----------------------------------------------------------------------------------------------------------------------*/
+*{
+    margin: 0;                      /*Space between border and other element*/
+    padding: 0;                     /*Space between content and border of the box itself*/
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+html{
+    background-color: #fff;
+    color: #555;
+    font-family: "Lato", "Arial", sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+}
+
+h1,h2,h3{
+    font-weight: 300; /* How bold the text is*/
+    text-transform: uppercase;  /*toUpperCase();*/
+    letter-spacing: 1px; /*space between letters*/
+}
+
+h1{
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 240%; /*This will be 200% relative to wheatever was defined in html tag. If we change it in html - this will be update automatically*/
+    word-spacing: 4px; /*space between words*/
+}
+
+h2{
+    font-size: 180%;
+    word-spacing: 2px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h3{
+    font-size: 100%;
+    margin-bottom: 15px;
+    letter-spacing: 0px;
+    text-align: center;
+}
+
+h2:after{          /*this will go right after ?every? h2*/
+    display: block;
+    height: 2px;
+    background-color: #e67e22;
+    content: " ";
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.row{
+    max-width: 1140px;
+    margin: 0 auto;
+    /* To keep everything always centered, set left and right margins to auto.
+    This is one way of doing it: using 4 params that correspond to TOP, RIGHT, BOTTOM, LEFT
+    margin: 0, auto, 0, auto; 
+    Another way is to use 2 params. first parm will correspond to top and bottom and second - left and right
+    margin: 0, auto;*/
+}
+
+a:link,             /*default look of the link*/
+a:visited{          /*when link was already pressed*/
+    text-decoration: none;
+    color: #e67e22;
+    padding-bottom: 1px;
+    border-bottom: 1px solid #e67e22;
+    -webkit-transition: border-bottom 0.2s, color 0.2s;
+    transition: border-bottom 0.2s, color 0.2s;
+}
+
+a:hover,            /*when mouse is on top*/
+a:active{           /*when user pressed and holds the link*/
+    color: #555;
+    border-bottom: 1px solid transparent;
+}
+
+.clearfix{zoom: 1;}
+.clearfix::after{
+    content: ".";
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+
+/*--------------------------------------------------------------------------------------------------------------------
+                        HEADER SETUPS
+----------------------------------------------------------------------------------------------------------------------*/
+
+header{
+    /*To load the image and make it darker(to add some contrast between text and image), use the following:
+        linear-gradient will add (on top of the image) solid black. Make it slightly invisible to achieve the effect of dark image */
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.65)), to(rgba(0, 0, 0, 0.65))), url(./img/hero.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(./img/hero.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;                          /*height of the header is 100% of the view port*/
+}
+
+.hero-text-box{
+    position: absolute;
+    width: 1140px;
+    top:50%;
+    left:50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);   /*translates the element off of it's height and width to the LEFT*/
+}
+
+.logo{      /*Apply the same stylings to both, however, keep it hidden*/
+    height: 100px;
+    width: auto;
+    float: left;
+    margin-top: 20px;
+}
+
+.logo-black{
+    display: none;
+    height: 50px;
+    width: auto;
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+/*  Default Navigation Bar  */
+.main-nav{
+    float: right;
+    list-style: none; /*to get rid of those bullet points*/
+    margin-top: 50px;
+}
+
+.main-nav li{ /*This will select all li elements inside of main-nav class*/
+    /*by default li element is a block element (every li is on a separate line)
+    to change that and make they line up horizontali, we need to do the following*/
+    display: inline-block;
+    margin-left: 40px; 
+}
+
+.main-nav li a:link,
+.main-nav li a:visited{
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%; /*90% of default font setted up in html tag*/
+    padding: 8px 0;
+    border-bottom: 2px solid transparent; /*transparrent means that it will not be visible until we actualy hover over the element*/
+    -webkit-transition: border-bottom 0.2s;
+    transition: border-bottom 0.2s;
+}
+
+.main-nav li a:hover,
+.main-nav li a:active{
+    border-bottom: 2px solid #cf6d17;
+}
+
+
+/*  Sticky Navigation Bar  
+    make it dynamic */
+.sticky{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(230, 230, 230, 0.9);
+    -webkit-box-shadow: 0 2px 20px rgba(0, 0, 0);
+            box-shadow: 0 2px 20px rgba(0, 0, 0);
+    z-index: 9999;      /*Important one. Will display this ON TOP of every element because it has the heighest value*/
+}
+
+.sticky .main-nav{
+    margin-top: 15px;
+}
+
+.sticky .main-nav li a:link,
+.sticky .main-nav li a:visited{
+    padding: 10px 0;
+    color: #555;
+}
+
+.sticky .logo{
+    display: none;
+}
+
+.sticky .logo-black{
+    display: block;
+}
+
+/* Mobile Navigation Bar*/
+.mobile-navigation-bar{
+    float: right;
+    margin-top: 30px;
+    cursor: pointer; /*Because <a> tag doesnt have href property, cursor wont act like a link. We do it explicitly*/
+    display: none;
+}
+
+.mobile-navigation-bar i{
+    font-size: 200%;
+    color: #fff;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------
+                        Button Top Scroll
+----------------------------------------------------------------------------------------------------------------------*/
+.btn-top-scroll{
+    display: none;
+    z-index: 9999;
+    position: fixed;
+    bottom: 3%;
+    right: 3%;
+    font-size: 400%;
+    color: #555;
+}
+
+.btn-top-scroll:hover,
+.btn-top-scroll:active{
+    cursor: pointer;
+    color: #cf6d17;
+}
+
+
+/*--------------------------------------------------------------------------------------------------------------------
+                        HEADER BUTTONS
+----------------------------------------------------------------------------------------------------------------------*/
+/*
+    HUGE NOTE:
+    Links (in our case buttons have 4 states:
+    Link -> this is there normal state as they appear
+    Visited -> this is how they will look like after being clicked
+    Hover -> what will happen when we put mouse of top?
+    Active -> when we actually click on it na hold it down, how will it look?
+*/
+.btn:link,          /*This means that this styling will apply to both cases. Also, note that there is not space between semicolon and a state of the link*/
+.btn:visited,
+input[type=submit]{
+    display: inline-block; /* a tag is inline tag (not block tag). however, we can give a property to act like block*/
+    padding: 10px 30px;
+    font-weight: 300;
+    text-decoration: none;  /*because a is a link, it will remove that underline*/
+    border-radius: 200px;   /*this is make button round*/
+
+    /*CSS3 feature. When we hover over this link-button this changes will apply*/
+    -webkit-transition: backgroud-color 0.2s, border 0.2s, color 0.2s;
+    transition: backgroud-color 0.2s, border 0.2s, color 0.2s;
+}
+
+.btn:hover,
+.btn:active,
+input[type=submit]:hover,
+input[type=submit]:active{
+    background-color: #cf6d17; /*Use 0to255.com to find darker or lighter shade of a certain color*/
+}
+
+.btn-full:link,     /*This means that this styling will apply to both cases. Also, note that there is not space between semicolon and a state of the link*/
+.btn-full:visited,
+input[type=submit]{
+    /*dont forget to use flat colors*/
+    background-color: #e67e22;
+    border: 1px solid #e67e22;
+    color: #fff;
+}
+
+.btn-full:hover,
+.btn-full:active,
+input[type=submit]{
+    border: 1px solid #cf6d17;
+}
+
+.btn-ghost:link,    /*This means that this styling will apply to both cases. Also, note that there is not space between semicolon and a state of the link*/
+.btn-ghost:visited{
+    border: 1px solid #e67e22;
+    color: #e67e22;
+}
+
+.btn-ghost:hover,
+.btn-ghost:active{
+    border: 1px solid #cf6d17;
+    color: #fff;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------
+                        SECTION SETUPS
+----------------------------------------------------------------------------------------------------------------------*/
+section{
+    padding: 80px 0;
+}
+
+.long-copyright{
+    line-height: 145%;
+    width: 72%;
+    margin-left: 15%;
+    margin-bottom: 20px;
+}
+
+.box{
+    padding: 2%;
+}
+
+.box p{
+    font-size: 90%;
+    line-height: 145%;
+}
+
+.icon-section{
+    font-size: 350%;
+    display: block;     /*forces a line break*/
+    color: #e67e22;
+    margin-bottom: 1px;
+    text-align: center;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------
+                        MEALS SHOWCASE
+----------------------------------------------------------------------------------------------------------------------*/
+.section-meals{
+    padding: 0px;
+}
+.meals-showcase{
+    list-style-type: none; /*because it's a list, remove bulletpoints*/
+    width:100%;
+}
+
+.meals-showcase li{
+    display: block;
+    float: left;
+    width: 25%;
+}
+
+.food-photo{
+    width: 100%;                    /*this means that each element will take up 100% of the width of its parent. DOENST MEAN the original size*/
+    margin: 0;
+    overflow: hidden;               /*This fixes the scale problem it will hide the overflow of the page*/
+    background-color: #000;       /*We need to set it to black because, when we change opacity property, we dont want it to become light. Instead, we want it to be dark*/
+}
+
+.food-photo img{
+    width: 100%;
+    height: auto;
+    opacity: 0.7;           /*this is visibility of the element. */
+    -webkit-transform: scale(1.20);
+            transform: scale(1.20); /*this zooms in every photo by 20%. The reason for doing that is that we want to add an effect when we hover on the image.
+                            (We want the picture to become smaller). It will add cool styling effect. 
+                            However, scalling will cause a problem - overflow (page becomes wider than browser)
+                            We dont want that, that's why we need to change something in the parent container which is .food-photo*/
+    -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+    transition: opacity 0.5s, -webkit-transform 0.5s;
+    transition: transform 0.5s, opacity 0.5s;
+    transition: transform 0.5s, opacity 0.5s, -webkit-transform 0.5s; /*this is for animation!*/
+}
+
+.food-photo img:hover{
+    opacity: 1;
+    -webkit-transform: scale(1.05);
+            transform: scale(1.05); /*this will avoid a problem of having white space between hovered photo*/
+}
+
+
+/*--------------------------------------------------------------------------------------------------------------------
+                        HOW IT WORKS SECTION
+----------------------------------------------------------------------------------------------------------------------*/
+
+.section-steps{
+    background-color: #f4f4f4;
+}
+
+.steps-box:first-child{ /*applies properties to the first child*/
+    margin-top: 30px;
+    text-align: right;
+    padding-right: 3%;
+}
+
+.steps-box:last-child{
+    margin-top: 70px;
+    padding-left: 3%;
+}
+
+.app-screen{
+    width: 40%;
+}
+
+.work-steps{
+    margin-bottom: 50px;
+}
+
+.work-steps:last-of-type{ /*finds the last element with this tag*/
+    margin-bottom: 80px;
+}
+
+.work-steps div{
+    color: #e67e22;
+    border: 2px solid #e67e22;
+    border-radius: 50%;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    /*float: left;*/
+    padding: 5px;
+    font-size: 150%;
+    margin-right: 20px; 
+}
+
+.btn-app img{
+    height: 50px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.btn-app:link,
+.btn-app:visited{
+    border: 0;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------
+                        CITIES SECTION
+----------------------------------------------------------------------------------------------------------------------*/
+.box img{
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.city-feature{
+    margin-bottom: 15px;
+}
+
+.icon-city{
+    display: inline-block; /*Make them aligned to each other*/
+    width: 30px;
+    text-align: center;     /*Can do that because they are inside the inline-block*/
+    color: #e67e22;
+    font-size: 120%;
+    margin-right: 10px;
+    /*Because we increaced size of icons (font-size), icon is not perfectly aligned with the text, do the following*/
+    line-height: 120%;
+    vertical-align: middle;
+    margin-top: -5px;       /*to lift the icon up*/
+}
+
+
+/*--------------------------------------------------------------------------------------------------------------------
+                        CUSTOMER REVIEWS
+----------------------------------------------------------------------------------------------------------------------*/
+.section-testimonials{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url(./img/back-customers.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(./img/back-customers.jpg);
+    background-size: cover;
+    color: rgba(255, 255, 255, 0.753);
+    background-attachment: fixed;       /*No idea what that does*/
+}
+
+blockquote{
+    padding: 2%;
+    font-style: italic;
+    line-height: 145%;
+    position: relative; /*See WHY WE NEED IT below*/
+    margin-top: 40px;
+}
+
+/*
+blockquote:before{
+    position: absolute;     /*when position is absolute, make sure that the parent (in our case - blockquote) of this tag has a RALTIVE position
+    top: -5px;
+    left: -5px;
+    display: block;
+    content: "\201C";
+    font-size: 300%;
+}
+*/
+
+/*
+blockquote:after{
+    position: absolute;
+    bottom: -20px;
+    right: -5px;
+    content: "\201D";
+    font-size: 300%;
+}
+*/
+
+cite{
+    font-size: 90%;
+    margin-top: 25px;
+    display: block;
+    text-align: right;
+    margin-top: -10px;
+}
+
+cite img{
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------
+                        MEAL PLANS
+----------------------------------------------------------------------------------------------------------------------*/
+.section-plans{
+    background-color: #f4f4f4;
+}
+
+.plan-box{
+    background-color: #fff;
+    border-radius: 5px;
+    width: 90%;
+    margin-left: 5%;
+
+    /* parmeters: X-axis, Y-axis, Blur Radius, Color                            VERY AWESOME!*/
+    -webkit-box-shadow: 15px -10px 25px rgb(163, 163, 163);
+            box-shadow: 15px -10px 25px rgb(163, 163, 163);
+}
+
+.plan-box div{
+    padding: 15px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.plan-box div:first-child{
+    background-color: #fcfcfc;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.plan-box div:last-child{   /*In our case it is the div responsible to button*/
+    text-align: center;
+    border: none;
+}
+
+.plan-box ul{
+    list-style: none;
+}
+
+.plan-box ul li{
+    padding: 5px 0;
+}
+
+.plan-price{
+    font-size: 300%;
+    margin-bottom: 10px;
+    font-weight: 100;
+    color: #e67e22;
+}
+
+.plan-price span{
+    font-size: 30%;         /*30% of parent tag*/
+    font-weight: 300;
+}
+
+.plan-price-meal{
+    font-size: 80%;
+}
+/*--------------------------------------------------------------------------------------------------------------------
+                        MAP
+----------------------------------------------------------------------------------------------------------------------*/
+.map-box{
+    width: 100%;
+    height: 560px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.map{
+    width: 100%;
+    height: 500px;
+    position: relative;
+    z-index: 0;
+}
+
+.form-box{
+    position: absolute;
+    width: 50%;
+    top: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.75);
+    z-index: 10;
+    height: 500px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+
+/*--------------------------------------------------------------------------------------------------------------------
+                        CONTACT FORM (This will be replaced. See MAP div
+----------------------------------------------------------------------------------------------------------------------*/
+.contact-form{
+    width: 90%;
+    margin: 0 auto; /*To Center Elements*/
+}
+
+input[type=text], /*Appy the following properties to the elements: input (of type text and email), select and textarea */
+input[type=email],
+ select, textarea{
+    width: 100%;
+    padding: 7px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+textarea{
+    width: 100%;
+}
+
+input[type=checkbox]{
+    margin: 10px 5px 10px 0;
+}
+
+*:focus{            /*For all elements who are selected - remove that focus border that chrome adds*/
+    outline: none;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------
+                        FOOTER
+----------------------------------------------------------------------------------------------------------------------*/
+footer{
+    background-color: #333;
+    padding: 45px;
+    font-size: 70%;
+}
+
+.footer-navigation{
+    list-style: none;
+    float: left;
+}
+
+.social-links{
+    list-style: none;
+    float: right;
+}
+
+.ion-social-facebook,
+.ion-social-twitter,
+.ion-social-googleplus,
+.ion-social-instagram{
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+}
+
+.ion-social-facebook:hover{
+    color: #3b5998;
+}
+
+.ion-social-twitter:hover{
+    color:  #4099FF;
+}
+
+.ion-social-googleplus:hover{
+    color: #dd4b39;
+}
+
+.ion-social-instagram:hover{
+    color:#8a3ab9;
+}
+
+.footer-navigation li,
+.social-links li{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.footer-navigation li:last-child,
+.social-links li:last-child{
+    margin: 0;
+}
+
+.footer-navigation li a:link,
+.footer-navigation li a:visited,
+.social-links li a:link,
+.social-links li a:visited{
+    text-decoration: none;
+    border: 0;
+    color: #888;
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+}
+
+.social-links li a:link,
+.social-links li a:visited{
+    font-size: 180%;
+}
+
+.footer-navigation li a:hover,
+.footer-navigation li a:active{
+    color: #ddd;
+}
+
+footer p{
+    color: #888;
+    text-align: center;
+    font-size: 90%;
+    margin-top: 20px;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------
+                        ANIMATIONS (Note: dont forget to prefix it. Not all browsers support it)
+----------------------------------------------------------------------------------------------------------------------*/
+
+/* We need to change opacity of all elements becase they all have FadeIn Effect. js--animation-waypoint-4 DOES NOT*/
+.js--animation-waypoint-1,
+.js--animation-waypoint-2,
+.js--animation-waypoint-3{
+    /*We need to hide elements in order to apply the effect
+        However, display:none wont work here. Instead use opacity property*/
+    opacity: 0;
+    -webkit-animation-duration: 2s;
+            animation-duration: 2s;
+}
+
+.js--animation-waypoint-4{
+    -webkit-animation-duration: 2s;
+            animation-duration: 2s;
+}
+
+
+.js--animation-waypoint-1.animated,
+.js--animation-waypoint-2.animated,
+.js--animation-waypoint-3.animated
+{ /* when both classes exist at the same time*/
+    opacity: 1;
+}
