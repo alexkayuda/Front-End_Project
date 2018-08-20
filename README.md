@@ -1,5 +1,5 @@
 # OmniFood - food delivery service 
-## Click this :point_right: [link](https://alexkayuda.github.io/Front-End_Project/) to check the project out!
+## Click :point_right: [this link](https://alexkayuda.github.io/Front-End_Project/) to check the project out!
 ____
 
 ##### Please note that "We're Happy to Hear From You" section was originally designed to look like that: :point_down: 
